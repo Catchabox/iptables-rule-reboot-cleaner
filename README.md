@@ -8,9 +8,9 @@ Automatically loads and manages `iptables` firewall rules stored in a file, ensu
 
 ### Usage
 
-[apply_and_cleanup.sh](https://github.com/Catchabox/iptables-rule-reboot-cleaner/blob/main/apply_and_cleanup.sh) needs to create a “** iptables_rules.txt**” file in the same directory, and write the iptables rules in this TXT file, for example.
+[apply_and_cleanup.sh](https://github.com/Catchabox/iptables-rule-reboot-cleaner/blob/main/apply_and_cleanup.sh) needs to create a "**iptables_rules.txt**" file in the same directory, and write the iptables rules in this TXT file, for example.
 
-``
+```
 iptables -I DOCKER-USER -s 0.0.0.0/0 -d 172.20.0.0/16 -j DROP
 iptables -I DOCKER-USER -s 127.0.0.1 -d 172.20.0.0/16 -j ACCEPT
 iptables -I DOCKER-USER -s 172.20.0.0/16 -d 127.0.0.1 -j ACCEPT
