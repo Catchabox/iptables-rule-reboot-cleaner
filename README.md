@@ -38,7 +38,7 @@ Can be executed separately to clean up the list of duplicate rules in the `DOCKE
 
 ### Brief description of function
 
-This script deletes unwanted rules, but it does not modify the content of “**iptables_rules.txt**”, so please modify it yourself.
+This script deletes unwanted rules, but it does not modify the content of “**rules_to_delete.txt**”, so please modify it yourself.
 
 ### Usage
 
