@@ -37,9 +37,9 @@ Can be executed separately to clean up the list of duplicate rules in the `DOCKE
 
 ## delete_rules.sh
 
-### Description
+### Brief description of function
 
-This script can be used to delete unwanted rules, but it will not modify the content of “**iptables_rules.txt**”, so please modify it by yourself.
+You can delete the rules you don't want by this script, you can put the rules you want to delete into the file “**rules_to_delete.txt**” according to the format of the following usage, but this script won't modify the content of “**iptables_rules.txt**”, please modify it by yourself.
 
 ### Usage
 
@@ -49,4 +49,4 @@ DOCKER-USER -s 127.0.0.1 -d 172.20.0.0/16 -j ACCEPT
 DOCKER-USER -s 172.20.0.0/16 -d 127.0.0.1 -j ACCEPT
 ``````
 
-You don't need to add `iptables -I` in front of it for it to take effect
+Note: You don't need to add `iptables -I` in front of it to make it work!
