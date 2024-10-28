@@ -8,7 +8,7 @@
 
 ### 用法
 
-[apply_and_cleanup.sh](https://github.com/Catchabox/iptables-rule-reboot-cleaner/blob/main/apply_and_cleanup.sh)需要在同一目录下创建一个"**iptables_rules.txt**"文件,在该TXT文档里面书写iptables规则，例如:
+[apply_and_cleanup.sh](https://github.com/Catchabox/iptables-rule-reboot-cleaner/blob/main/apply_and_cleanup.sh)需要在同一目录下创建一个"**rules_to_delete.txt**"文件,在该TXT文档里面书写iptables规则，例如:
 
 ```
 iptables -I DOCKER-USER -s 0.0.0.0/0 -d 172.20.0.0/16 -j DROP
