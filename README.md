@@ -28,6 +28,21 @@ Just run it
 ``````
 bash apply_and_cleanup.sh
 ``````
+## delete_rules.sh
+
+### Brief description of function
+
+This script deletes unwanted rules, but it does not modify the content of “**iptables_rules.txt**”, so please modify it yourself.
+
+### Usage
+
+``````
+DOCKER-USER -s 0.0.0.0/0 -d 172.20.0.0/16 -j DROP
+DOCKER-USER -s 127.0.0.1 -d 172.20.0.0/16 -j ACCEPT
+DOCKER-USER -s 172.20.0.0/16 -d 127.0.0.1 -j ACCEPT
+``````
+
+You don't need to add `iptables -I` in front of it for it to take effect
 
 ## clean_duplicate_rules.sh
 
