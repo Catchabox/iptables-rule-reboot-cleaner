@@ -34,3 +34,19 @@ bash apply_and_cleanup.sh
 ### 功能简述
 
 可以单独执行，清理`DOCKER-USER 链中的重复规则列表`可以根据需求进行修改
+
+## delete_rules.sh
+
+### 功能简述
+
+上述添加了不想要的规则可以通过该脚本删除，但是该脚本不会修改"**iptables_rules.txt**"内容，请自行修改
+
+### 用法
+
+``````
+DOCKER-USER -s 0.0.0.0/0 -d 172.20.0.0/16 -j DROP
+DOCKER-USER -s 127.0.0.1 -d 172.20.0.0/16 -j ACCEPT
+DOCKER-USER -s 172.20.0.0/16 -d 127.0.0.1 -j ACCEPT
+``````
+
+不需要在前面加`iptables -I`即可生效
