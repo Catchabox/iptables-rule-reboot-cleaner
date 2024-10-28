@@ -20,7 +20,7 @@ while read -r line; do
     # 跳过空行和注释行
     [[ -z "$line" || "$line" =~ ^#.*$ ]] && continue
 
-    # 移除“iptables ”前缀，仅保留规则部分以供检查
+    # 移除 "iptables " 前缀，仅保留规则部分以供检查
     rule="${line#iptables }"
 
     # 检查规则是否有效，并捕获错误信息
@@ -42,8 +42,12 @@ CRON_CMD="@reboot $TEMP_SCRIPT"
 echo "Crontab 已更新，在启动时将执行 iptables 规则。"
 
 # 应用规则并避免重复
+ADDED_RULES=()
 while read -r line; do
-    # 移除“iptables ”前缀，仅保留规则部分以供检查
+    # 跳过空行和注释行
+    [[ -z "$line" || "$line" =~ ^#.*$ ]] && continue
+
+    # 移除 "iptables " 前缀，仅保留规则部分以供检查
     rule="${line#iptables }"
 
     # 检查规则是否已存在
@@ -54,11 +58,24 @@ while read -r line; do
             echo "错误信息：$(cat /tmp/iptables_error.log)"
             continue
         fi
+        # 记录添加的规则
+        ADDED_RULES+=("$line")
     else
         echo "规则已存在：$line"
     fi
 done < "$RULES_FILE"
+
 echo "iptables 规则已成功应用。"
+
+# 显示添加的规则
+if [ ${#ADDED_RULES[@]} -gt 0 ]; then
+    echo "已添加的规则："
+    for rule in "${ADDED_RULES[@]}"; do
+        echo "$rule"
+    done
+else
+    echo "没有添加新的规则。"
+fi
 
 # 检查并执行清理脚本
 if [[ -f "$CLEANUP_SCRIPT" ]]; then
