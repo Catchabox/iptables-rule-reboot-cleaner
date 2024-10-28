@@ -4,6 +4,7 @@
 RULES_FILE="$(pwd)/iptables_rules.txt"
 TEMP_SCRIPT="$(pwd)/temp_iptables.sh"
 CLEANUP_SCRIPT="$(pwd)/clean_duplicate_rules.sh"
+RULES_TO_DELETE_FILE="$(pwd)/rules_to_delete.txt"
 
 # 创建一个临时脚本来执行这些 iptables 规则
 echo "#!/bin/bash" > "$TEMP_SCRIPT"
@@ -19,6 +20,16 @@ function rule_exists {
 while read -r line; do
     # 跳过空行和注释行
     [[ -z "$line" || "$line" =~ ^#.*$ ]] && continue
+
+    # 处理以 ** 开头的特殊规则
+    if [[ "$line" =~ ^\*\* ]]; then
+        special_rule="${line#\*\*}"
+        # 仅保留规则部分并添加到删除列表文件
+        rule_only="${special_rule#iptables -I }"
+        echo "$rule_only" >> "$RULES_TO_DELETE_FILE"
+        echo "提醒：以下规则已被标记为删除：$line"
+        continue
+    fi
 
     # 移除 "iptables " 前缀，仅保留规则部分以供检查
     rule="${line#iptables }"
@@ -46,6 +57,11 @@ ADDED_RULES=()
 while read -r line; do
     # 跳过空行和注释行
     [[ -z "$line" || "$line" =~ ^#.*$ ]] && continue
+
+    # 跳过以 ** 开头的特殊规则
+    if [[ "$line" =~ ^\*\* ]]; then
+        continue
+    fi
 
     # 移除 "iptables " 前缀，仅保留规则部分以供检查
     rule="${line#iptables }"
