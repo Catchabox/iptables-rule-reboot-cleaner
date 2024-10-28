@@ -28,6 +28,12 @@ Just run it
 ``````
 bash apply_and_cleanup.sh
 ``````
+## clean_duplicate_rules.sh
+
+### Description
+
+Can be executed separately to clean up the list of duplicate rules in the `DOCKER-USER chain`, which can be modified according to your needs.
+
 ## delete_rules.sh
 
 ### Brief description of function
@@ -43,9 +49,3 @@ DOCKER-USER -s 172.20.0.0/16 -d 127.0.0.1 -j ACCEPT
 ``````
 
 You don't need to add `iptables -I` in front of it for it to take effect
-
-## clean_duplicate_rules.sh
-
-### Description
-
-Can be executed separately to clean up the list of duplicate rules in the `DOCKER-USER chain`, which can be modified according to your needs.
