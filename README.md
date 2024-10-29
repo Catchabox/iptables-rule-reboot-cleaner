@@ -44,9 +44,8 @@ You can delete the rules you don't want by this script, you can put the rules yo
 ### Usage
 
 ``````
-DOCKER-USER -s 0.0.0.0/0 -d 172.20.0.0/16 -j DROP
-DOCKER-USER -s 127.0.0.1 -d 172.20.0.0/16 -j ACCEPT
-DOCKER-USER -s 172.20.0.0/16 -d 127.0.0.1 -j ACCEPT
+iptables -D DOCKER-USER -s 0.0.0.0/0 -d 172.21.0.0/16 -j DROP
+iptables -D DOCKER-USER -s 127.0.0.1 -d 172.21.0.0/16 -j ACCEPT
+iptables -D DOCKER-USER -s 172.21.0.0/16 -d 127.0.0.1 -j ACCEPT
 ``````
 
-Note: You don't need to add `iptables -I` in front of it to make it work!
