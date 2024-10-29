@@ -44,9 +44,8 @@ bash apply_and_cleanup.sh
 ### 用法
 
 ``````
-DOCKER-USER -s 0.0.0.0/0 -d 172.20.0.0/16 -j DROP
-DOCKER-USER -s 127.0.0.1 -d 172.20.0.0/16 -j ACCEPT
-DOCKER-USER -s 172.20.0.0/16 -d 127.0.0.1 -j ACCEPT
+iptables -D DOCKER-USER -s 0.0.0.0/0 -d 172.21.0.0/16 -j DROP
+iptables -D DOCKER-USER -s 127.0.0.1 -d 172.21.0.0/16 -j ACCEPT
+iptables -D DOCKER-USER -s 172.21.0.0/16 -d 127.0.0.1 -j ACCEPT
 ``````
 
-注意：不需要在前面加`iptables -I`即可生效
